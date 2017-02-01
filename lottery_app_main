@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jan 30 20:43:43 2017
+
+@author: Anju Mercian
+"""
+#Lottery App that lets user picks 6 numbers between 1-20 and matches with the lottery number
+import random
+
+def menu():
+    #Ask player for number
+    user_numbers = get_player_numbers();
+    #calculate the lottery numbers
+    lottery_values = create_lottery_numbers();
+    #Print out the winnings.
+    matched_numbers = user_numbers.intersection(lottery_values)
+    print("you matched {}. You have won ${}.".format(matched_numbers,100 ** len(matched_numbers)))
+
+#Get the user pick of the numbers.
+def get_player_numbers():
+    number_csv = input("Enter your 6 numbers, seperated by comma: ")
+    #create a set of numbers from the user input
+    number_list = number_csv.split(",")
+    int_set = {int(number) for number in number_list}
+    return int_set
+    
+#print(get_player_numbers())
+
+#Get the lottery numbers
+def create_lottery_numbers():
+    lottery_num = set()
+    #cannot initialize an empty set like {}
+    while len(lottery_num) < 6:
+        lottery_num.add(random.randint(1,20))
+    return lottery_num
+    
+#print(create_lottery_numbers())
+
+menu()
